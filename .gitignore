@@ -1,0 +1,26 @@
+# JS
+node_modules/
+dist/
+src/**/*.js
+*.js.map
+
+# VSCode
+.vscode-test/
+.vscode/
+!.vscode/tasks.json
+!.vscode/launch.json
+**/*.vsix
+out/
+
+# Images
+images/*.png
+
+# Logs
+*.log
+logs/
+
+# Nix
+result
+.direnv
+.envrc
+

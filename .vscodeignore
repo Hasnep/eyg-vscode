@@ -1,0 +1,40 @@
+.vscode/**
+.vscode-test/**
+out/**
+src/**
+vsc-extension-quickstart.md
+**/eslint.config.mjs
+**/.vscode-test.*
+
+# Textmate grammar tests
+syntaxes/tests/
+syntaxes/snapshots/
+
+# JS
+biome.json
+node_modules/**
+**/tsconfig.json
+**/*.ts
+**/*.map
+esbuild.js
+
+# Images
+images/*.svg
+
+# Build
+Justfile
+
+# CI
+.github/
+
+# VCS
+.jj/
+.git/
+.gitignore
+
+# Nix
+.direnv/
+.envrc
+**/*.nix
+flake.lock
+result

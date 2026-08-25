@@ -1,0 +1,138 @@
+// This is a comment
+let x = 5
+// x is now 5
+x
+
+let x = 42
+let y = -7
+0
+
+let a = "hello, world"
+let b = "line one\nline two"
+"she said \"hi\""
+
+let _ = x
+let _ = my_value
+counter1
+
+let x = 5
+let y = 10
+x
+
+let x = 5 x
+
+let {name: first, age: n} = {name: "Bob", age: 25, admin: True({})}
+first
+
+let {name, age} = person
+name
+
+let {} = record
+result
+
+(x) -> { x }
+
+(x, y) -> { x }
+
+({name, age}) -> { name }
+
+(_) -> { perform Print("hello\n") }
+
+let double = (x) -> { !int_multiply(x, 2) }
+double(5)
+
+let add = (x, y) -> { !int_add(x, y) }
+add(3, 4)
+
+let factorial = !fix((self, n) -> {
+  match !int_compare(n, 0) {
+    Eq(_) -> { 1 }
+    | (_) -> { !int_multiply(n, self(!int_subtract(n, 1))) }
+  }
+})
+factorial(5)
+
+let _ = f(x)
+let _ = f(x)(y)
+outer(inner(value))
+
+let _ = {}
+{name: "Alice", age: 30}
+
+person.name
+
+{age: 31, ..person}
+
+let name = "Alice"
+{name}
+// equivalent to {name: name}
+
+let l1 = []
+let l2 = [1, 2, 3]
+["a", "b",]
+
+let list = [1, ..rest]
+
+let _ = Ok
+let _ = Error
+let _ = True
+False
+
+let _ = Ok(value)
+Error("something went wrong")
+
+match result {
+  Ok(value) -> { value }
+  Error(msg) -> { 0 }
+}
+
+match Ok(5) {
+  Ok(n) -> { n }
+  Error(_) -> { 0 }
+}
+
+let handle_result = match {
+  Ok(value) -> { value }
+  Error(_) -> { -1 }
+}
+handle_result(Ok(42))
+
+match x {
+  Ok(value) -> { value }
+  | (other) -> { -1 }
+}
+
+perform Log("hello")
+
+handle Log
+
+let seven = !int_add(3, 4)
+let product = !int_multiply(x, y)
+!string_append("hello", " world")
+
+#bafyreigdmqpykrgxyahdnfmfzmc5j4bkwci6wf6fkdbapq7hfpmg2j3yqy
+
+let fs = import "../eyg_packages/fs/index.eyg"
+let {list} = import "../eyg_packages/standard/index.eyg.json"
+
+let fs = import "../eyg_packages/fs/index.eyg"
+let {list} = import "../eyg_packages/standard/index.eyg.json"
+
+let files = fs.list_files({root: ".", ignore: [".git"]})
+let gleam_files = list.filter(
+  (path) -> { !string_ends_with(path, ".gleam") },
+  files
+)
+gleam_files
+
+let parse_age = (s) -> {
+  match !int_parse(s) {
+    Ok(n) -> { Ok(n) }
+    Error(_) -> { Error("not a number") }
+  }
+}
+
+match parse_age("42") {
+  Ok(age) -> { perform Print(age) }
+  Error(msg) -> { perform Print(msg) }
+}

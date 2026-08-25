@@ -1,0 +1,122 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"scopeName": "source.eyg",
+	"patterns": [
+		{ "include": "#comments" },
+		{ "include": "#keywords" },
+		{ "include": "#operators" },
+		{ "include": "#variables" },
+		{ "include": "#numbers" },
+		{ "include": "#types" },
+		{ "include": "#punctuation" },
+		{ "include": "#strings" }
+	],
+	"repository": {
+		"escapes": {
+			"name": "constant.character.escape.eyg",
+			"match": "\\\\[ntr\"\\\\]"
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"comment": "Integer literal",
+					"name": "constant.numeric.eyg",
+					"match": "\\b[0-9]+"
+				}
+			]
+		},
+		"strings": {
+			"patterns": [
+				{
+					"comment": "double-quoted string",
+					"name": "string.quoted.double.eyg",
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"include": "#escapes"
+						}
+					]
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"match": "//.*$",
+					"name": "comment.line.eyg"
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{ "name": "keyword.operator.eyg", "match": "\\b(or|and)\\b" },
+				{ "name": "keyword.operator.eyg", "match": "!=" },
+				{ "name": "keyword.operator.eyg", "match": "!" },
+				{ "name": "keyword.operator.eyg", "match": "->" },
+				{ "name": "keyword.operator.eyg", "match": "=>" },
+				{ "name": "keyword.operator.eyg", "match": ">=" },
+				{ "name": "keyword.operator.eyg", "match": "<=" },
+				{ "name": "keyword.operator.eyg", "match": ">" },
+				{ "name": "keyword.operator.eyg", "match": "<" },
+				{ "name": "keyword.operator.eyg", "match": "==" },
+				{ "name": "keyword.operator.eyg", "match": ":=" },
+				{ "name": "keyword.operator.eyg", "match": "\\.\\." },
+				{ "name": "keyword.operator.eyg", "match": "\\.\\.\\." },
+				{ "name": "keyword.operator.eyg", "match": "\\?\\?" },
+				{ "name": "keyword.operator.eyg", "match": "::" },
+				{
+					"match": "=",
+					"name": "keyword.operator.assignment.eyg"
+				}
+			]
+		},
+		"variables": {
+			"name": "variable.other.eyg",
+			"match": "(?<!(?<!\\.)\\.)(?:\\b|\\$)[a-z_][a-z0-9_]*(?:!|\\b)",
+			"comment": "Uses a negative lookbehind to exclude a presceding dot (e.g. `.identifier`), but include two presceding dots (e.g. `..identifier`)"
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.eyg",
+					"match": "\\b(match|import|let)\\b"
+				}
+			]
+		},
+		"types": {
+			"name": "storage.type.eyg",
+			"match": "\\b[A-Z][A-Za-z_0-9]*\\b"
+		},
+		"punctuation": {
+			"patterns": [
+				{
+					"name": "punctuation.comma.eyg",
+					"match": ","
+				},
+				{
+					"name": "punctuation.colon.eyg",
+					"match": ":"
+				},
+				{
+					"name": "punctuation.brackets.curly.eyg",
+					"match": "[{}]"
+				},
+				{
+					"name": "punctuation.brackets.round.eyg",
+					"match": "[()]"
+				},
+
+				{
+					"comment": "square brackets",
+					"name": "punctuation.brackets.square.eyg",
+					"match": "[\\[\\]]"
+				},
+				{
+					"match": "\\.",
+					"name": "punctuation.accessor.eyg"
+				}
+			]
+		}
+	}
+}

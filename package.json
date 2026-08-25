@@ -1,0 +1,86 @@
+{
+	"galleryBanner": {
+		"color": "202746",
+		"theme": "dark"
+	},
+	"license": "UPL-1.0",
+	"icon": "./images/penelopea.png",
+	"pricing": "Free",
+
+	"author": {
+		"email": "h@nnes.dev",
+		"name": "Hannes",
+		"url": "https://ha.nnes.dev"
+	},
+	"name": "eyg",
+	"repository": {
+		"url": "https://github.com/hasnep/eyg-vscode",
+		"type": "git"
+	},
+	"publisher": "hannes",
+	"displayName": "EYG",
+	"description": "Unofficial VSCode extension for the EYG language",
+	"version": "0.0.0",
+	"engines": {
+		"vscode": "^1.75.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"private": true,
+	"activationEvents": [],
+	"main": "./dist/extension.js",
+	"contributes": {
+		"languages": [
+			{
+				"id": "eyg",
+				"aliases": [
+					"EYG"
+				],
+				"extensions": [
+					".eyg"
+				],
+				"configuration": "./language-configuration.json",
+				"icon": {
+					"dark": "./images/penelopea.png",
+					"light": "./images/penelopea.png"
+				}
+			}
+		],
+		"grammars": [
+			{
+				"language": "eyg",
+				"scopeName": "source.eyg",
+				"path": "./syntaxes/eyg.tmLanguage.json"
+			}
+		],
+		"commands": [],
+		"configuration": {
+			"title": "EYG",
+			"properties": {}
+		},
+		"configurationDefaults": {
+			"[eyg]": {
+				"editor.insertSpaces": false,
+				"editor.formatOnSave": true
+			}
+		}
+	},
+	"scripts": {
+		"test": "vscode-test"
+	},
+	"dependencies": {
+		"vscode-languageclient": "^9.0.1"
+	},
+	"devDependencies": {
+		"ovsx": "^0.10.11",
+		"textmate-grammar-test": "^0.6.0",
+		"@types/vscode": "^1.75.0",
+		"@types/mocha": "^10.0.10",
+		"@types/node": "22.x",
+		"esbuild": "^0.27.2",
+		"typescript": "^5.9.3",
+		"@vscode/test-cli": "^0.0.12",
+		"@vscode/test-electron": "^2.5.2"
+	}
+}
