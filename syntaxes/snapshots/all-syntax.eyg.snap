@@ -280,8 +280,7 @@
 #                 ^^ source.eyg keyword.operator.eyg
 #                   ^ source.eyg
 #                    ^ source.eyg punctuation.brackets.curly.eyg
-#                     ^ source.eyg
-#                      ^ source.eyg keyword.operator.eyg
+#                     ^^ source.eyg
 #                       ^^^^^^^^^^^^ source.eyg variable.other.eyg
 #                                   ^ source.eyg punctuation.brackets.round.eyg
 #                                    ^ source.eyg variable.other.eyg
@@ -315,8 +314,7 @@
 #                 ^^ source.eyg keyword.operator.eyg
 #                   ^ source.eyg
 #                    ^ source.eyg punctuation.brackets.curly.eyg
-#                     ^ source.eyg
-#                      ^ source.eyg keyword.operator.eyg
+#                     ^^ source.eyg
 #                       ^^^^^^^ source.eyg variable.other.eyg
 #                              ^ source.eyg punctuation.brackets.round.eyg
 #                               ^ source.eyg variable.other.eyg
@@ -342,8 +340,7 @@
 #    ^^^^^^^^^ source.eyg variable.other.eyg
 #             ^ source.eyg
 #              ^ source.eyg keyword.operator.assignment.eyg
-#               ^ source.eyg
-#                ^ source.eyg keyword.operator.eyg
+#               ^^ source.eyg
 #                 ^^^ source.eyg variable.other.eyg
 #                    ^ source.eyg punctuation.brackets.round.eyg
 #                     ^ source.eyg punctuation.brackets.round.eyg
@@ -359,8 +356,7 @@
 >  match !int_compare(n, 0) {
 #^^ source.eyg
 #  ^^^^^ source.eyg keyword.control.eyg
-#       ^ source.eyg
-#        ^ source.eyg keyword.operator.eyg
+#       ^^ source.eyg
 #         ^^^^^^^^^^^ source.eyg variable.other.eyg
 #                    ^ source.eyg punctuation.brackets.round.eyg
 #                     ^ source.eyg variable.other.eyg
@@ -393,8 +389,7 @@
 #          ^^ source.eyg keyword.operator.eyg
 #            ^ source.eyg
 #             ^ source.eyg punctuation.brackets.curly.eyg
-#              ^ source.eyg
-#               ^ source.eyg keyword.operator.eyg
+#              ^^ source.eyg
 #                ^^^^^^^^^^^^ source.eyg variable.other.eyg
 #                            ^ source.eyg punctuation.brackets.round.eyg
 #                             ^ source.eyg variable.other.eyg
@@ -402,7 +397,7 @@
 #                               ^ source.eyg
 #                                ^^^^ source.eyg variable.other.eyg
 #                                    ^ source.eyg punctuation.brackets.round.eyg
-#                                     ^ source.eyg keyword.operator.eyg
+#                                     ^ source.eyg
 #                                      ^^^^^^^^^^^^ source.eyg variable.other.eyg
 #                                                  ^ source.eyg punctuation.brackets.round.eyg
 #                                                   ^ source.eyg variable.other.eyg
@@ -817,8 +812,7 @@
 #    ^^^^^ source.eyg variable.other.eyg
 #         ^ source.eyg
 #          ^ source.eyg keyword.operator.assignment.eyg
-#           ^ source.eyg
-#            ^ source.eyg keyword.operator.eyg
+#           ^^ source.eyg
 #             ^^^^^^^ source.eyg variable.other.eyg
 #                    ^ source.eyg punctuation.brackets.round.eyg
 #                     ^ source.eyg constant.numeric.eyg
@@ -832,8 +826,7 @@
 #    ^^^^^^^ source.eyg variable.other.eyg
 #           ^ source.eyg
 #            ^ source.eyg keyword.operator.assignment.eyg
-#             ^ source.eyg
-#              ^ source.eyg keyword.operator.eyg
+#             ^^ source.eyg
 #               ^^^^^^^^^^^^ source.eyg variable.other.eyg
 #                           ^ source.eyg punctuation.brackets.round.eyg
 #                            ^ source.eyg variable.other.eyg
@@ -842,7 +835,7 @@
 #                               ^ source.eyg variable.other.eyg
 #                                ^ source.eyg punctuation.brackets.round.eyg
 >!string_append("hello", " world")
-#^ source.eyg keyword.operator.eyg
+#^ source.eyg
 # ^^^^^^^^^^^^^ source.eyg variable.other.eyg
 #              ^ source.eyg punctuation.brackets.round.eyg
 #               ^ source.eyg string.quoted.double.eyg
@@ -967,8 +960,7 @@
 #         ^^ source.eyg keyword.operator.eyg
 #           ^ source.eyg
 #            ^ source.eyg punctuation.brackets.curly.eyg
-#             ^ source.eyg
-#              ^ source.eyg keyword.operator.eyg
+#             ^^ source.eyg
 #               ^^^^^^^^^^^^^^^^ source.eyg variable.other.eyg
 #                               ^ source.eyg punctuation.brackets.round.eyg
 #                                ^^^^ source.eyg variable.other.eyg
@@ -1007,8 +999,7 @@
 >  match !int_parse(s) {
 #^^ source.eyg
 #  ^^^^^ source.eyg keyword.control.eyg
-#       ^ source.eyg
-#        ^ source.eyg keyword.operator.eyg
+#       ^^ source.eyg
 #         ^^^^^^^^^ source.eyg variable.other.eyg
 #                  ^ source.eyg punctuation.brackets.round.eyg
 #                   ^ source.eyg variable.other.eyg
