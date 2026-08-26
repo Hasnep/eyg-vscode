@@ -80,7 +80,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.eyg",
-					"match": "\\b(match|import|let)\\b"
+					"match": "\\b(match|import|let|perform|handle)\\b"
 				}
 			]
 		},

@@ -1,9 +1,9 @@
-# Change Log
+# Changelog
 
-All notable changes to the "EYG" extension will be documented in this file.
+## Unreleased
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+- Highlight `perform` and `handle` as keywords.
 
-## [Unreleased]
+## v0.0.0
 
-- Initial release
+- Initial release.
