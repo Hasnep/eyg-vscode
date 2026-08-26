@@ -1,0 +1,24 @@
+// SYNTAX TEST "source.eyg" "Strings"
+
+>let a = "hello, world"
+//       ^^^^^^^^^^^^^^ string.quoted.double.eyg
+
+>let b = "line one\nline two"
+//       ^^^^^^^^^^^^^^^^^^^^ string.quoted.double.eyg
+//                ^^ constant.character.escape.eyg
+
+>let c = "line one\r\nline two"
+//       ^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.eyg
+//                ^^ constant.character.escape.eyg
+//                  ^^ constant.character.escape.eyg
+
+>let d = "x\ty\tz"
+//       ^^^^^^^^^ string.quoted.double.eyg
+//         ^^ constant.character.escape.eyg
+//            ^^ constant.character.escape.eyg
+
+>let e = "she said \"hi\""
+//       ^^^^^^^^^^^^^^^^^ string.quoted.double.eyg
+//                 ^^ constant.character.escape.eyg
+//                     ^^ constant.character.escape.eyg
+
