@@ -41,7 +41,6 @@
               npmDepsHash = "sha256-toVN/IYIpq/TmN5lcrmGHEmVIyhzfChcnMtsr5LbYd0=";
 
               nativeBuildInputs = [
-                pkgs.esbuild
                 pkgs.imagemagick
                 pkgs.just
                 pkgs.pkg-config
@@ -51,7 +50,6 @@
               buildInputs = [ pkgs.libsecret ];
 
               buildPhase = ''
-                just build-js
                 just build-logo
               '';
             };
@@ -61,12 +59,10 @@
             packages = [
               # keep-sorted start
               pkgs.nodejs
-              pkgs.typescript
               pkgs.just
               pkgs.xvfb-run
               pkgs.biome
               pkgs.vsce
-              pkgs.esbuild
               # keep-sorted end
             ];
           };

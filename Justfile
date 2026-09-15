@@ -9,20 +9,8 @@ lint:
 tsc:
     tsc
 
-[parallel]
-build: build-js build-logo
-	vsce package
-
-build-js:
-    esbuild \
-        src/extension.ts \
-        --bundle \
-        --format=cjs \
-        --minify \
-        --sources-content=false \
-        --platform=node \
-        --outfile=dist/extension.js \
-        --external:vscode
+build: build-logo
+    vsce package
 
 build-logo:
     magick \
@@ -40,28 +28,7 @@ build-logo:
         -extent 250x250 \
         images/penelopea.png
 
-watch:
-    esbuild \
-        src/extension.ts \
-        --bundle \
-        --format=cjs \
-        --sourcemap \
-        --sources-content=false \
-        --platform=node \
-        --outfile=dist/extension.js \
-        --external:vscode \
-        --watch
-
-[parallel]
-test: test-extension test-textmate-grammar
-
-[linux]
-test-extension:
-    xvfb-run -a npm run test
-
-[macos]
-test-extension:
-    npm run test
+test: test-textmate-grammar
 
 test-textmate-grammar:
     npx --no-install --call 'textmate-grammar-test syntaxes/tests/**/*.eyg'
