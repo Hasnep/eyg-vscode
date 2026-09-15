@@ -80,12 +80,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish to VSCode Marketplace
-        run: npx --no-install --call 'vsce publish out/*.vsix'
-        env:
-          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      # - name: Publish to VSCode Marketplace
+      #   run: npx --no-install --call 'vsce publish out/*.vsix'
+      #   env:
+      #     VSCE_PAT: ${{ secrets.VSCE_PAT }}
 
-      - name: Publish to Open VSX
-        run: npx --no-install --call 'ovsx publish out/*.vsix'
-        env:
-          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+      # - name: Publish to Open VSX
+      #   run: npx --no-install --call 'ovsx publish out/*.vsix'
+      #   env:
+      #     OVSX_PAT: ${{ secrets.OVSX_PAT }}
