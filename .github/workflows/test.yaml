@@ -26,5 +26,9 @@ jobs:
           restore-prefixes-first-match: nix-${{ runner.os }}-${{ runner.arch }}
       - name: Use Nix dev shell for subsequent steps
         uses: rrbutani/use-nix-shell-action@v1
+
+      - name: Install JavaScript dependencies
+        run: npm ci
+
       - name: Run checks
         run: just test
