@@ -28,35 +28,63 @@
         {
           packages = {
             default = self'.packages.eyg-vscode;
-            eyg-vscode = pkgs.vscode-utils.buildVscodeExtension {
+
+            eyg-vscode = pkgs.vscode-utils.buildVscodeExtension (finalAttrs: {
               pname = "eyg-vscode";
-              version = "0.0.0";
-              vscodeExtPublisher = "hannes";
+              version = finalAttrs.src.version;
+
+              vscodeExtPublisher = "hasnep";
               vscodeExtName = "eyg";
-              vscodeExtUniqueId = "hannes.eyg";
+              vscodeExtUniqueId = "${finalAttrs.vscodeExtPublisher}.${finalAttrs.vscodeExtName}";
+
+              src = self'.packages.eyg-vscode-vsix;
+            });
+
+            eyg-vscode-vsix = pkgs.stdenv.mkDerivation (finalAttrs: {
+              name = "eyg-vscode.vsix";
+              pname = "eyg-vscode-vsix";
+              version = "0.0.0";
 
               src = pkgs.lib.cleanSource ./.;
               sourceRoot = "source";
 
-              npmDepsHash = "sha256-toVN/IYIpq/TmN5lcrmGHEmVIyhzfChcnMtsr5LbYd0=";
+              npmDeps = pkgs.fetchNpmDeps {
+                name = "${finalAttrs.pname}-npm-deps";
+                src = finalAttrs.src;
+                hash = "sha256-toVN/IYIpq/TmN5lcrmGHEmVIyhzfChcnMtsr5LbYd0=";
+              };
 
               nativeBuildInputs = [
+                # keep-sorted start
                 pkgs.imagemagick
                 pkgs.just
+                pkgs.nodejs-slim
+                pkgs.nodejs-slim.npm
                 pkgs.pkg-config
                 pkgs.vsce
+                pkgs.writableTmpDirAsHomeHook
+                # keep-sorted end
               ];
+              buildInputs = pkgs.lib.optionals pkgs.stdenv.hostPlatform.isLinux [ pkgs.libsecret ];
 
-              buildInputs = [ pkgs.libsecret ];
+              strictDeps = true;
 
               buildPhase = ''
-                just build-logo
+                runHook preBuild
+                just build
+                runHook postBuild
               '';
-            };
+
+              installPhase = ''
+                runHook preInstall
+                cp build/eyg-vscode-${finalAttrs.version}.vsix $out
+                runHook postInstall
+              '';
+            });
           };
 
           devShells.default = pkgs.mkShell {
-            packages = [
+            packages = self'.packages.eyg-vscode-vsix.nativeBuildInputs ++ [
               # keep-sorted start
               pkgs.actionlint
               pkgs.biome
@@ -64,7 +92,6 @@
               pkgs.just
               pkgs.keep-sorted
               pkgs.nixfmt
-              pkgs.nodejs
               pkgs.pre-commit
               pkgs.python3
               pkgs.python3Packages.pre-commit-hooks
