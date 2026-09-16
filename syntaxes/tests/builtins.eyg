@@ -1,0 +1,4 @@
+// SYNTAX TEST "source.eyg" "Builtins"
+
+let double = (x) -> { !int_multiply(x, 2) }
+                      ^^^^^^^^^^^^^ variable.other.eyg

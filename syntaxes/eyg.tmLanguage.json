@@ -73,7 +73,7 @@
 		},
 		"variables": {
 			"name": "variable.other.eyg",
-			"match": "(?<!(?<!\\.)\\.)(?:\\b|\\$)[a-z_][a-z0-9_]*(?:!|\\b)",
+			"match": 			"(?<!(?<!\\.)\\.)(?:\\b|\\$)(?:!)?[a-z_][a-z0-9_]*(?:!|\\b)",
 			"comment": "Uses a negative lookbehind to exclude a presceding dot (e.g. `.identifier`), but include two presceding dots (e.g. `..identifier`)"
 		},
 		"keywords": {
