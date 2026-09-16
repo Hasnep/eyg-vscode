@@ -56,11 +56,11 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # ratchet:actions/upload-artifact@v4
         with:
           name: eyg-vscode-vsix
-          path: out/
+          path: build/
 
       - name: Upload VSIX file to release
         if: github.event_name == 'release' # Only upload when a release is published
-        run: gh release upload "$VERSION" "out/eyg-vscode-$VERSION.vsix"
+        run: gh release upload "$VERSION" "build/eyg-vscode-$VERSION.vsix"
         env:
           VERSION: ${{ github.ref_name }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
