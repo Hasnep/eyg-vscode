@@ -1,40 +1,16 @@
-.vscode/**
-.vscode-test/**
-out/**
-src/**
-vsc-extension-quickstart.md
-**/eslint.config.mjs
-**/.vscode-test.*
+# Ignore everything and then unignore only the files we need
+**/*
 
-# Textmate grammar tests
-syntaxes/tests/
-syntaxes/snapshots/
+# Textmate grammar
+!syntaxes/*.json
 
-# JS
-biome.json
-node_modules/**
-**/tsconfig.json
-**/*.ts
-**/*.map
-esbuild.js
+# Logo
+!images/*.png
 
-# Images
-images/*.svg
+# Language configuration
+!language-configuration.json
 
-# Build
-Justfile
-
-# CI
-.github/
-
-# VCS
-.jj/
-.git/
-.gitignore
-
-# Nix
-.direnv/
-.envrc
-**/*.nix
-flake.lock
-result
+# Metadata
+!README.md
+!CHANGELOG.md
+!LICENCE
