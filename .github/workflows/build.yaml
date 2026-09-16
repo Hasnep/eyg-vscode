@@ -1,5 +1,7 @@
 name: Build
 
+permissions: {}
+
 on:
   # Run on all PRs
   pull_request:
@@ -16,22 +18,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # ratchet:actions/checkout@v7
         with:
           persist-credentials: false
-          fetch-depth: 1 # Fetch only the latest commit
+          fetch-depth: 1  # Fetch only the latest commit
 
       - name: Install Nix
-        uses: nixbuild/nix-quick-install-action@v35
+        uses: nixbuild/nix-quick-install-action@9f63be77f412a248c9d9a65a4c82cf066cdf8f0c  # ratchet:nixbuild/nix-quick-install-action@v35
 
       - name: Cache Nix environment
-        uses: nix-community/cache-nix-action@v7
+        uses: nix-community/cache-nix-action@7df957e333c1e5da7721f60227dbba6d06080569  # ratchet:nix-community/cache-nix-action@v7
         with:
           primary-key: nix-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
           restore-prefixes-first-match: nix-${{ runner.os }}-${{ runner.arch }}
 
       - name: Use Nix dev shell for subsequent steps
-        uses: rrbutani/use-nix-shell-action@v1
+        uses: rrbutani/use-nix-shell-action@59a52b2b9bbfe3cc0e7deb8f9059abe37a439edf  # ratchet:rrbutani/use-nix-shell-action@v1
 
       - name: Build
         run: |
@@ -40,7 +42,7 @@ jobs:
             && cp --dereference result/*.vsix out/
 
       - name: Upload the artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # ratchet:actions/upload-artifact@v7
         with:
           name: eyg-vscode-vsix
           path: out/
@@ -52,33 +54,34 @@ jobs:
     if: github.event_name == 'release'
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # ratchet:actions/checkout@v7
         with:
           persist-credentials: false
-          fetch-depth: 1 # Fetch only the latest commit
+          fetch-depth: 1  # Fetch only the latest commit
 
       - name: Install Nix
-        uses: nixbuild/nix-quick-install-action@v35
+        uses: nixbuild/nix-quick-install-action@9f63be77f412a248c9d9a65a4c82cf066cdf8f0c  # ratchet:nixbuild/nix-quick-install-action@v35
 
       - name: Cache Nix environment
-        uses: nix-community/cache-nix-action@v7
+        uses: nix-community/cache-nix-action@7df957e333c1e5da7721f60227dbba6d06080569  # ratchet:nix-community/cache-nix-action@v7
         with:
           primary-key: nix-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
           restore-prefixes-first-match: nix-${{ runner.os }}-${{ runner.arch }}
 
       - name: Use Nix dev shell for subsequent steps
-        uses: rrbutani/use-nix-shell-action@v1
+        uses: rrbutani/use-nix-shell-action@59a52b2b9bbfe3cc0e7deb8f9059abe37a439edf  # ratchet:rrbutani/use-nix-shell-action@v1
 
       - name: Download the artifact
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093  # ratchet:actions/download-artifact@v4
         with:
           name: eyg-vscode-vsix
           path: out/
 
       - name: Upload artifact to release
-        run: gh release upload ${{ github.ref_name }} out/*.vsix
+        run: gh release upload "$VERSION" out/*.vsix
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ github.ref_name }}
 
       # - name: Publish to VSCode Marketplace
       #   run: npx --no-install --call 'vsce publish out/*.vsix'

@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Update the draft release
         id: update-draft-release
-        uses: release-drafter/release-drafter@v7
+        uses: release-drafter/release-drafter@34d80673e067bdc0c24568d3af899c216adcfaa9  # ratchet:release-drafter/release-drafter@v7
         with:
           config-name: release-drafter.yaml
           disable-autolabeler: true

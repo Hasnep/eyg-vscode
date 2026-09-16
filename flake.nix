@@ -58,11 +58,22 @@
           devShells.default = pkgs.mkShell {
             packages = [
               # keep-sorted start
-              pkgs.nodejs
-              pkgs.just
-              pkgs.xvfb-run
+              pkgs.actionlint
               pkgs.biome
+              pkgs.deadnix
+              pkgs.just
+              pkgs.keep-sorted
+              pkgs.nixfmt
+              pkgs.nodejs
+              pkgs.pre-commit
+              pkgs.python3Packages.pre-commit-hooks
+              pkgs.ratchet
+              pkgs.rumdl
+              pkgs.shellcheck
               pkgs.vsce
+              pkgs.xvfb-run
+              pkgs.yamlfix
+              pkgs.zizmor
               # keep-sorted end
             ];
           };

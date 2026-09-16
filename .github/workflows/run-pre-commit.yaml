@@ -1,4 +1,4 @@
-name: Test
+name: Run Pre-commit
 
 permissions: {}
 
@@ -10,8 +10,8 @@ on:
     branches: [main]
 
 jobs:
-  test:
-    name: Test
+  run-pre-commit:
+    name: Run Pre-commit
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
@@ -30,10 +30,13 @@ jobs:
           restore-prefixes-first-match: nix-${{ runner.os }}-${{ runner.arch }}
 
       - name: Use Nix dev shell for subsequent steps
-        uses: rrbutani/use-nix-shell-action@59a52b2b9bbfe3cc0e7deb8f9059abe37a439edf  # ratchet:rrbutani/use-nix-shell-action@v1
+        uses: rrbutani/use-nix-shell-action@59a52b2b9bbfe3cc0e7deb8f9059abe37a439edf  # ratchet:rrbutani/use-nix-shell-action@v1.1.0
 
       - name: Install JavaScript dependencies
         run: npm ci
 
-      - name: Run tests
-        run: just test
+      - name: Run Pre-commit
+        run: pre-commit run --all-files
+        env:
+          # Prevent this action failing when running on the main branch
+          SKIP: no-commit-to-branch
