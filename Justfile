@@ -1,4 +1,5 @@
-all: check test build
+help:
+    just --list
 
 [parallel]
 check: lint tsc
@@ -9,8 +10,10 @@ lint:
 tsc:
     tsc
 
+[parallel]
 build: build-logo
-    vsce package
+    mkdir -p build/
+    vsce package --out=build/
 
 build-logo:
     magick \

@@ -15,6 +15,8 @@ on:
 jobs:
   build:
     name: Build
+    permissions:
+      contents: write  # For uploading to GitHub release
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
@@ -27,68 +29,38 @@ jobs:
         uses: nixbuild/nix-quick-install-action@9f63be77f412a248c9d9a65a4c82cf066cdf8f0c  # ratchet:nixbuild/nix-quick-install-action@v35
 
       - name: Cache Nix environment
-        uses: nix-community/cache-nix-action@7df957e333c1e5da7721f60227dbba6d06080569  # ratchet:nix-community/cache-nix-action@v7
+        uses: nix-community/cache-nix-action@7df957e333c1e5da7721f60227dbba6d06080569 # ratchet:nix-community/cache-nix-action@v7  # zizmor: ignore[cache-poisoning]
+        # Don't enable the cache when releasing to avoid cache-poisoning
+        if: ${{ github.event_name != 'release' }}
         with:
           primary-key: nix-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
           restore-prefixes-first-match: nix-${{ runner.os }}-${{ runner.arch }}
 
-      - name: Use Nix dev shell for subsequent steps
-        uses: rrbutani/use-nix-shell-action@59a52b2b9bbfe3cc0e7deb8f9059abe37a439edf  # ratchet:rrbutani/use-nix-shell-action@v1
+      - name: Check tag matches package version
+        if: github.event_name == 'release' # Only check when a release is published
+        run: scripts/check-versions-match.py "$VERSION"
+        env:
+          VERSION: ${{ github.event.release.tag_name }}
 
-      - name: Build
+      - name: Build Nix package
+        run: nix build --no-link .#eyg-vscode
+
+      - name: Build VSIX
         run: |
-          nix build \
-            && mkdir -p out \
-            && cp --dereference result/*.vsix out/
+          mkdir -p build/
+          cat "$(nix build --no-link --print-out-paths .#eyg-vscode-vsix)" > "build/eyg-vscode-$VERSION.vsix"
+        env:
+          VERSION: ${{ github.event.release.tag_name }}
 
       - name: Upload the artifact
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # ratchet:actions/upload-artifact@v7
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # ratchet:actions/upload-artifact@v4
         with:
           name: eyg-vscode-vsix
           path: out/
 
-  release:
-    name: Release
-    runs-on: ubuntu-latest
-    # Only publish when a release is published
-    if: github.event_name == 'release'
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # ratchet:actions/checkout@v7
-        with:
-          persist-credentials: false
-          fetch-depth: 1  # Fetch only the latest commit
-
-      - name: Install Nix
-        uses: nixbuild/nix-quick-install-action@9f63be77f412a248c9d9a65a4c82cf066cdf8f0c  # ratchet:nixbuild/nix-quick-install-action@v35
-
-      - name: Cache Nix environment
-        uses: nix-community/cache-nix-action@7df957e333c1e5da7721f60227dbba6d06080569  # ratchet:nix-community/cache-nix-action@v7
-        with:
-          primary-key: nix-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
-          restore-prefixes-first-match: nix-${{ runner.os }}-${{ runner.arch }}
-
-      - name: Use Nix dev shell for subsequent steps
-        uses: rrbutani/use-nix-shell-action@59a52b2b9bbfe3cc0e7deb8f9059abe37a439edf  # ratchet:rrbutani/use-nix-shell-action@v1
-
-      - name: Download the artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093  # ratchet:actions/download-artifact@v4
-        with:
-          name: eyg-vscode-vsix
-          path: out/
-
-      - name: Upload artifact to release
-        run: gh release upload "$VERSION" out/*.vsix
+      - name: Upload VSIX file to release
+        if: github.event_name == 'release' # Only upload when a release is published
+        run: gh release upload "$VERSION" "out/eyg-vscode-$VERSION.vsix"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ github.ref_name }}
-
-      # - name: Publish to VSCode Marketplace
-      #   run: npx --no-install --call 'vsce publish out/*.vsix'
-      #   env:
-      #     VSCE_PAT: ${{ secrets.VSCE_PAT }}
-
-      # - name: Publish to Open VSX
-      #   run: npx --no-install --call 'ovsx publish out/*.vsix'
-      #   env:
-      #     OVSX_PAT: ${{ secrets.OVSX_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
