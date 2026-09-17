@@ -43,7 +43,7 @@
             eyg-vscode-vsix = pkgs.stdenv.mkDerivation (finalAttrs: {
               name = "eyg-vscode.vsix";
               pname = "eyg-vscode-vsix";
-              version = "0.0.1";
+              version = "0.0.2";
 
               src = pkgs.lib.cleanSource ./.;
               sourceRoot = "source";
